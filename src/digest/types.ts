@@ -11,4 +11,4 @@ export type DigestRow = {
   lastAt: string;
 };
 
-export declare function readNight(runsDir: string, night: string): DigestRow[];
+export { readNight } from './read.js';
