@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-10-29
 ---
 
 # Morning digest
@@ -77,3 +78,16 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|------------|--------|--------|
+| 1 | Digest: define shared types | — | codex · gpt-5 · medium | 2026-10-29 |
+| 2 | Digest: read nightly run logs | #1 | codex · gpt-5 · medium | 2026-10-29 |
+| 3 | Digest: render the digest page | #1 | codex · gpt-5 · medium | 2026-10-29 |
+| 4 | Digest: expose the JSON API | #1 | codex · gpt-5 · medium | 2026-10-29 |
+| 5 | Status board: link nightly digests | #1 | codex · gpt-5 · medium | 2026-10-29 |
+| 6 | Digest: add route tests | #1 | codex · gpt-5 · medium | 2026-10-29 |
+| 7 | Review: publish a public digest preview | #2, #3 | codex · gpt-5 · medium | 2026-10-29 |
+| 8 | Review: remove the preview marker and finish the plan | #7 | codex · gpt-5 · medium | 2026-10-29 |
