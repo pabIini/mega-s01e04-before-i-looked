@@ -9,6 +9,14 @@ import { Layout } from './views/layout.js';
 import { StatusBoard } from './views/status.js';
 import { DigestPage } from './views/digest.js';
 
+function digestRows(config: RigConfig, night: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(night) || !existsSync(join(config.runsDir, `${night}.jsonl`))) {
+    return null;
+  }
+
+  return readNight(config.runsDir, night).sort((a, b) => a.job.localeCompare(b.job));
+}
+
 export function createApp(config: RigConfig = loadConfig()) {
   const app = new Hono();
 
@@ -22,14 +30,24 @@ export function createApp(config: RigConfig = loadConfig()) {
     ),
   );
 
-  app.get('/digest/:night', (c) => {
+  app.get('/api/digest/:night', (c) => {
     const night = c.req.param('night');
+    const rows = digestRows(config, night);
 
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(night) || !existsSync(join(config.runsDir, `${night}.jsonl`))) {
+    if (!rows) {
       return c.notFound();
     }
 
-    const rows = readNight(config.runsDir, night).sort((a, b) => a.job.localeCompare(b.job));
+    return c.json(rows);
+  });
+
+  app.get('/digest/:night', (c) => {
+    const night = c.req.param('night');
+    const rows = digestRows(config, night);
+
+    if (!rows) {
+      return c.notFound();
+    }
 
     return c.html(
       <Layout title={`digest ${night}`} lane={lane()}>
